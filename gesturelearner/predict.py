@@ -19,6 +19,7 @@ def predict(image_in):
     image = Image.open(BytesIO(image_in))
     image = image.resize((IMAGE_WIDTH, IMAGE_HEIGHT))
     image = image.convert('L')
+    # image.show()
     image = asarray(image)
     image = tf.cast(image, tf.float32)
     image = image * (1. / 255) - 0.5
@@ -27,5 +28,5 @@ def predict(image_in):
     image[image != -0.5] = 0.5
     images = np.array(image)
     results = model.predict(images)
-    
+    print(results)
     return LABELS[np.argmax(results)]
