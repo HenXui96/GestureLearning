@@ -7,7 +7,7 @@ import tensorflow as tf
 import numpy as np
 from io import BytesIO
 
-from .constants import IMAGE_HEIGHT, IMAGE_WIDTH
+from .constants import IMAGE_HEIGHT, IMAGE_WIDTH, LABELS
 
 def predict(image_in):
     current_path = os.path.dirname(os.path.abspath(__file__))
@@ -28,4 +28,4 @@ def predict(image_in):
     images = np.array(image)
     results = model.predict(images)
     
-    return np.argmax(results)
+    return LABELS[np.argmax(results)]
