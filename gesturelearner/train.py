@@ -5,7 +5,7 @@ import tensorflow as tf
 
 from keras import Sequential, layers, Model
 
-from gesturelearner.constants import IMAGE_HEIGHT, IMAGE_WIDTH, NUM_LABEL_INDEXES
+from .constants import IMAGE_HEIGHT, IMAGE_WIDTH, NUM_LABEL_INDEXES
 
 def read_train_file(file_name):
     # Create a TFRecordDataset
@@ -106,8 +106,8 @@ def main(training_file, test_file, model_in=None, model_out=None):
 
 if __name__ == '__main__':
     current_path = os.path.dirname(os.path.abspath(__file__))
-    training_file = os.path.join(current_path, 'sample_data', 'data_filtered.tfrecords')
-    test_file = os.path.join(current_path, 'sample_data', 'data_filtered_test.tfrecords')
-    model_in = os.path.join(current_path, 'sample_data', 'model', 'gesturelearner_weights.h5')
-    model_out = os.path.join(current_path, 'sample_data', 'model', 'gesturelearner_weights.h5')
+    training_file = os.path.join(current_path, '../sample_data', 'data_filtered.tfrecords')
+    test_file = os.path.join(current_path, '../sample_data', 'data_filtered_test.tfrecords')
+    model_in = os.path.join(current_path, '../sample_data', 'model', 'gesturelearner_weights.h5')
+    model_out = os.path.join(current_path, '../sample_data', 'model', 'gesturelearner_weights.h5')
     main(training_file, test_file, model_in, model_out)

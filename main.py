@@ -1,5 +1,5 @@
 import os
-from train import create_model
+from gesturelearner.train import create_model
 
 from PIL import Image
 from numpy import asarray
@@ -7,7 +7,6 @@ import tensorflow as tf
 import numpy as np
 
 from gesturelearner.constants import IMAGE_HEIGHT, IMAGE_WIDTH
-from protobuf.touches_pb2 import _LABEL
 
 def main(model_in, image_in):
     model = create_model()
@@ -37,7 +36,7 @@ def main(model_in, image_in):
     images = np.array(image)
     results = model.predict(images)
     print(results)
-    print(_LABEL.values[np.argmax(results)].name)
+    print(np.argmax(results))
 
 if __name__ == '__main__':
     current_path = os.path.dirname(os.path.abspath(__file__))

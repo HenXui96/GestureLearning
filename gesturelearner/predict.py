@@ -1,22 +1,22 @@
 import os
-from train import create_model
+from .train import create_model
 
 from PIL import Image
 from numpy import asarray
 import tensorflow as tf
 import numpy as np
+from io import BytesIO
 
-from gesturelearner.constants import IMAGE_HEIGHT, IMAGE_WIDTH
-from protobuf.touches_pb2 import _LABEL
+from .constants import IMAGE_HEIGHT, IMAGE_WIDTH
 
 def predict(image_in):
     current_path = os.path.dirname(os.path.abspath(__file__))
-    model_in = os.path.join(current_path, 'sample_data', 'model', 'gesturelearner_weights.h5')
+    model_in = os.path.join(current_path, '../sample_data', 'model', 'gesturelearner_weights.h5')
 
     model = create_model()
     model.load_weights(model_in)
 
-    image = Image.open(image_in)
+    image = Image.open(BytesIO(image_in))
     image = image.resize((IMAGE_WIDTH, IMAGE_HEIGHT))
     image = image.convert('L')
     image = asarray(image)
@@ -28,4 +28,4 @@ def predict(image_in):
     images = np.array(image)
     results = model.predict(images)
     
-    return _LABEL.values[np.argmax(results)].name
+    return np.argmax(results)
